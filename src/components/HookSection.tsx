@@ -4,9 +4,9 @@ import CodeBlock from './CodeBlock'
 const hookUsageCode = `
 const { scrollRef, virtualItems, totalHeight, offsetY, handleScroll } =
   useVirtualList(filteredItems, {
-    itemHeight: 40,      // altura fixa de cada linha (px)
-    viewportHeight: 220, // altura visível do container (px)
-    overscan: 4,         // itens extras acima/abaixo da janela
+    itemHeight: 40,      // fixed height per row (px)
+    viewportHeight: 220, // visible container height (px)
+    overscan: 4,         // extra items above/below the window
   })
 `.trim()
 
@@ -27,52 +27,52 @@ const jsxPatternCode = `
 const returnValues = [
   {
     name: 'scrollRef',
-    description: 'Ref do container scrollável. Conecte ao elemento que recebe overflow.',
+    description: 'Ref for the scrollable container. Attach it to the element with overflow.',
   },
   {
     name: 'virtualItems',
-    description: 'Slice dos itens visíveis no momento — só eles vão para o DOM.',
+    description: 'Slice of currently visible items — only these go into the DOM.',
   },
   {
     name: 'totalHeight',
-    description: 'Altura total simulada (items.length × itemHeight) para manter o scroll.',
+    description: 'Simulated total height (items.length × itemHeight) to preserve scroll behavior.',
   },
   {
     name: 'offsetY',
-    description: 'Deslocamento vertical do bloco renderizado via transform.',
+    description: 'Vertical offset of the rendered block via transform.',
   },
   {
     name: 'handleScroll',
-    description: 'Handler estável para onScroll — atualiza scrollTop e recalcula a janela.',
+    description: 'Stable onScroll handler — updates scrollTop and recalculates the window.',
   },
   {
     name: 'startIndex',
-    description: 'Índice do primeiro item visível. Útil para aria-posinset ou numeração.',
+    description: 'Index of the first visible item. Useful for aria-posinset or numbering.',
   },
 ]
 
 export default function HookSection() {
   return (
     <div className="hero__hook">
-      <h2 className="hero__hook-title">Como funciona o useVirtualList</h2>
+      <h2 className="hero__hook-title">How useVirtualList works</h2>
       <p className="hero__hook-lead">
-        O hook calcula quais itens cabem na viewport com base no scrollTop. Em vez
-        de renderizar o array inteiro, ele devolve um slice, a altura total fictícia
-        e o offset para posicionar esse slice corretamente.
+        The hook calculates which items fit in the viewport based on scrollTop. Instead
+        of rendering the full array, it returns a slice, the simulated total height,
+        and the offset to position that slice correctly.
       </p>
 
       <ol className="hero__hook-steps">
-        <li>O usuário rola → <code>handleScroll</code> atualiza <code>scrollTop</code></li>
-        <li>O hook calcula <code>start</code> e <code>end</code> com overscan</li>
-        <li>Só <code>items.slice(start, end)</code> é retornado como <code>virtualItems</code></li>
-        <li>A altura total mantém a barra de scroll proporcional ao dataset</li>
+        <li>The user scrolls → <code>handleScroll</code> updates <code>scrollTop</code></li>
+        <li>The hook calculates <code>start</code> and <code>end</code> with overscan</li>
+        <li>Only <code>items.slice(start, end)</code> is returned as <code>virtualItems</code></li>
+        <li>Total height keeps the scrollbar proportional to the full dataset</li>
       </ol>
 
       <CodeBlock title="src/hooks/useVirtualList.ts" code={useVirtualListSource} />
-      <CodeBlock title="Uso no componente" code={hookUsageCode} />
-      <CodeBlock title="Padrão JSX" code={jsxPatternCode} />
+      <CodeBlock title="Usage in a component" code={hookUsageCode} />
+      <CodeBlock title="JSX pattern" code={jsxPatternCode} />
 
-      <h3 className="hero__hook-subtitle">O que o hook retorna</h3>
+      <h3 className="hero__hook-subtitle">What the hook returns</h3>
       <dl className="hero__hook-api">
         {returnValues.map((item) => (
           <div key={item.name} className="hero__hook-api-item">

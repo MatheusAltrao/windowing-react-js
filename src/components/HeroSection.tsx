@@ -1,50 +1,50 @@
-import Demo from "./Demo"
-import HookSection from "./HookSection"
-import WhenToUseSection from "./WhenToUseSection"
+import Demo from './Demo'
+import HookSection from './HookSection'
+import WhenToUseSection from './WhenToUseSection'
 
 const benefits = [
   {
-    title: 'Menos nós no DOM',
+    title: 'Fewer DOM nodes',
     description:
-      'Só os itens visíveis são montados. Com milhares de registros, o navegador não precisa criar tudo de uma vez.',
+      'Only visible items are mounted. With thousands of records, the browser does not need to create everything at once.',
   },
   {
-    title: 'Scroll fluido',
+    title: 'Smooth scrolling',
     description:
-      'Menos layout e repaint a cada movimento. A lista responde rápido mesmo com datasets grandes.',
+      'Less layout and repaint on every move. The list stays responsive even with large datasets.',
   },
   {
-    title: 'Menor uso de memória',
+    title: 'Lower memory usage',
     description:
-      'Componentes fora da viewport são desmontados, liberando recursos que uma lista completa manteria ocupados.',
+      'Components outside the viewport are unmounted, freeing resources a full list would keep occupied.',
   },
   {
-    title: 'Render inicial rápido',
+    title: 'Fast initial render',
     description:
-      'Abrir um dropdown ou carregar uma tabela deixa de bloquear a thread principal por segundos.',
+      'Opening a dropdown or loading a table no longer blocks the main thread for seconds.',
   },
 ]
 
 const useCases = [
-  'Seletores de país e região',
-  'Listagens de categorias e subcategorias',
-  'Tabelas com milhares de linhas',
-  'Feeds e timelines longas',
-  'Autocomplete com resultados extensos',
-  'Logs, histórico e auditoria',
+  'Country and region selectors',
+  'Category and subcategory listings',
+  'Tables with thousands of rows',
+  'Long feeds and timelines',
+  'Autocomplete with extensive results',
+  'Logs, history, and audit trails',
 ]
 
 export default function HeroSection() {
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <p className="hero__eyebrow">Virtualização de listas</p>
+      <p className="hero__eyebrow">List virtualization</p>
       <h1 id="hero-title" className="hero__title">
-        Renderize milhares de itens sem travar a interface
+        Render thousands of items without freezing the UI
       </h1>
       <p className="hero__lead">
-        A virtualização renderiza apenas a janela visível da lista. O restante
-        existe como altura calculada — não como DOM. Ideal para comboboxes,
-        tabelas e qualquer UI com scroll e muitos dados.
+        Virtualization renders only the visible window of the list. The rest
+        exists as calculated height — not as DOM. Ideal for comboboxes,
+        tables, and any scrollable UI with lots of data.
       </p>
 
       <ul className="hero__benefits">
@@ -61,7 +61,7 @@ export default function HeroSection() {
       <HookSection />
 
       <div className="hero__use-cases">
-        <h2 className="hero__use-cases-title">Casos de uso comuns</h2>
+        <h2 className="hero__use-cases-title">Common use cases</h2>
         <ul className="hero__use-cases-list">
           {useCases.map((useCase) => (
             <li key={useCase}>{useCase}</li>

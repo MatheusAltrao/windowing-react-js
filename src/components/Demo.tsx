@@ -1,19 +1,19 @@
-import { countries } from "../consts/countries";
-import CountryCombobox from "./CountryCombobox";
+import { countries } from '../consts/countries'
+import CountryCombobox from './CountryCombobox'
 
 export default function Demo() {
-    return (
-        <section className="demo" aria-labelledby="demo-title">
-            <header className="demo__header">
-                <h2 id="demo-title" className="demo__title">
-                    Demo ao vivo
-                </h2>
-                <p className="demo__description">
-                    Este combobox lista {countries.length} países, mas monta apenas ~15 itens por
-                    vez. Abra, busque e role para sentir a diferença.
-                </p>
-            </header>
-            <CountryCombobox />
-        </section>
-    )
+  return (
+    <section className="demo" aria-labelledby="demo-title">
+      <header className="demo__header">
+        <h2 id="demo-title" className="demo__title">
+          Live demo
+        </h2>
+        <p className="demo__description">
+          This combobox lists {countries.length} countries but mounts only ~15 items at
+          a time. Open it, search, and scroll to feel the difference.
+        </p>
+      </header>
+      <CountryCombobox />
+    </section>
+  )
 }

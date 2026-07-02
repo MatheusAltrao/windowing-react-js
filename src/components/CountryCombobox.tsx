@@ -71,7 +71,7 @@ export default function CountryCombobox() {
       </button>
 
       {isOpen && (
-        <div className="combobox__panel" role="listbox" aria-label="Países">
+        <div className="combobox__panel" role="listbox" aria-label="Countries">
           <div className="combobox__search">
             <span className="combobox__search-icon" aria-hidden="true">
               ⌕
@@ -79,7 +79,7 @@ export default function CountryCombobox() {
             <input
               type="search"
               className="combobox__search-input"
-              placeholder="Busque por país ou código"
+              placeholder="Search by country or code"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               autoFocus
@@ -87,7 +87,7 @@ export default function CountryCombobox() {
           </div>
 
           {filteredCountries.length === 0 ? (
-            <p className="combobox__empty">Nenhum país encontrado</p>
+            <p className="combobox__empty">No countries found</p>
           ) : (
             <div
               ref={scrollRef}
