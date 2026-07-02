@@ -1,97 +1,97 @@
 # Virtualization List
 
-Demo interativa de **virtualização de listas** em React. O projeto mostra como renderizar apenas os itens visíveis de uma lista longa — mantendo scroll fluido e DOM enxuto — com um hook customizado (`useVirtualList`) e um combobox de países como exemplo prático.
+An interactive **list virtualization** demo in React. This project shows how to render only the visible items of a long list — keeping scroll smooth and the DOM lean — using a custom hook (`useVirtualList`) and a country combobox as a practical example.
 
-## O que é virtualização de listas?
+## What is list virtualization?
 
-Em vez de montar todos os itens no DOM, a virtualização calcula quais cabem na viewport e renderiza só essa janela. O restante existe como **altura calculada**, não como nós HTML.
+Instead of mounting every item in the DOM, virtualization calculates which items fit in the viewport and renders only that window. The rest exists as **calculated height**, not as HTML nodes.
 
 ```
-Lista com 1.000 itens
-├── Sem virtualização → ~1.000 nós no DOM
-└── Com virtualização → ~15 nós no DOM (visíveis + overscan)
+List with 1,000 items
+├── Without virtualization → ~1,000 DOM nodes
+└── With virtualization    → ~15 DOM nodes (visible + overscan)
 ```
 
 ## Demo
 
-A aplicação inclui:
+The app includes:
 
-- **Combobox de países** com busca e bandeiras (~125 países, ~15 itens renderizados por vez)
-- **Hero section** explicando benefícios e casos de uso
-- **Seção "Quando usar"** com sinais de que a virtualização é necessária
-- **Seção do hook** com código-fonte de referência e padrão JSX
+- **Country combobox** with search and flags (~125 countries, ~15 items rendered at a time)
+- **Hero section** explaining benefits and use cases
+- **"When to use" section** with signals that virtualization is needed
+- **Hook section** with source code reference and JSX pattern
 
 ## Stack
 
 - [React 19](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vite 8](https://vite.dev/)
-- [react-international-phone](https://www.npmjs.com/package/react-international-phone) — bandeiras no combobox
-- CSS puro (sem framework de UI)
+- [react-international-phone](https://www.npmjs.com/package/react-international-phone) — flags in the combobox
+- Plain CSS (no UI framework)
 
-## Começando
+## Getting started
 
 ```bash
-# Instalar dependências
+# Install dependencies
 npm install
 
-# Servidor de desenvolvimento
+# Development server
 npm run dev
 
-# Build de produção
+# Production build
 npm run build
 
-# Preview do build
+# Preview the build
 npm run preview
 
 # Lint
 npm run lint
 ```
 
-## Estrutura do projeto
+## Project structure
 
 ```
 src/
-├── App.tsx                      # Layout principal
+├── App.tsx                      # Main layout
 ├── components/
-│   ├── CountryCombobox.tsx      # Combobox virtualizado
-│   ├── Demo.tsx                 # Wrapper da demo
-│   ├── HeroSection.tsx          # Conteúdo introdutório
-│   ├── HookSection.tsx          # Documentação do hook
-│   ├── WhenToUseSection.tsx     # Quando usar virtualização
-│   └── CodeBlock.tsx            # Bloco de código formatado
+│   ├── CountryCombobox.tsx      # Virtualized combobox
+│   ├── Demo.tsx                 # Demo wrapper
+│   ├── HeroSection.tsx          # Intro content
+│   ├── HookSection.tsx          # Hook documentation
+│   ├── WhenToUseSection.tsx     # When to use virtualization
+│   └── CodeBlock.tsx            # Formatted code block
 ├── hooks/
-│   └── useVirtualList.ts        # Hook de virtualização
+│   └── useVirtualList.ts        # Virtualization hook
 ├── consts/
-│   └── countries.tsx            # Lista mockada de países
-└── index.css                    # Estilos globais
+│   └── countries.tsx            # Mock country list
+└── index.css                    # Global styles
 ```
 
-## Hook `useVirtualList`
+## `useVirtualList` hook
 
-Hook genérico que recebe um array e retorna apenas os itens visíveis com base no scroll.
+A generic hook that takes an array and returns only the visible items based on scroll position.
 
-### Parâmetros
+### Parameters
 
-| Opção            | Tipo     | Descrição                                      |
-| ---------------- | -------- | ---------------------------------------------- |
-| `items`          | `T[]`    | Array completo de dados                        |
-| `itemHeight`     | `number` | Altura fixa de cada item em pixels             |
-| `viewportHeight` | `number` | Altura visível do container scrollável         |
-| `overscan`       | `number` | Itens extras renderizados acima/abaixo (padrão: 4) |
+| Option           | Type     | Description                                           |
+| ---------------- | -------- | ----------------------------------------------------- |
+| `items`          | `T[]`    | Full data array                                       |
+| `itemHeight`     | `number` | Fixed height of each item in pixels                   |
+| `viewportHeight` | `number` | Visible height of the scrollable container            |
+| `overscan`       | `number` | Extra items rendered above/below (default: 4)         |
 
-### Retorno
+### Return value
 
-| Propriedade     | Descrição                                              |
-| --------------- | ------------------------------------------------------ |
-| `scrollRef`     | Ref para o container com `overflow-y: auto`            |
-| `virtualItems`  | Slice dos itens visíveis no momento                    |
-| `totalHeight`   | Altura total simulada (`items.length × itemHeight`)    |
-| `offsetY`       | Deslocamento vertical via `transform: translateY()`    |
-| `handleScroll`  | Handler estável para `onScroll`                        |
-| `startIndex`    | Índice do primeiro item visível                        |
+| Property       | Description                                           |
+| -------------- | ----------------------------------------------------- |
+| `scrollRef`    | Ref for the container with `overflow-y: auto`         |
+| `virtualItems` | Slice of currently visible items                      |
+| `totalHeight`  | Simulated total height (`items.length × itemHeight`)  |
+| `offsetY`      | Vertical offset via `transform: translateY()`       |
+| `handleScroll` | Stable handler for `onScroll`                         |
+| `startIndex`   | Index of the first visible item                       |
 
-### Uso
+### Usage
 
 ```tsx
 const { scrollRef, virtualItems, totalHeight, offsetY, handleScroll } =
@@ -116,35 +116,35 @@ const { scrollRef, virtualItems, totalHeight, offsetY, handleScroll } =
 </div>
 ```
 
-## Quando usar
+## When to use
 
-**Use virtualização quando:**
+**Use virtualization when:**
 
-- A lista tem centenas ou milhares de itens
-- Cada item é um componente React com conteúdo rico (ícones, imagens, ações)
-- O scroll ou a abertura do dropdown ficam lentos
-- A altura de cada item é fixa ou previsível
+- The list has hundreds or thousands of items
+- Each item is a React component with rich content (icons, images, actions)
+- Scrolling or opening the dropdown feels slow
+- Each item has a fixed or predictable height
 
-**Evite quando:**
+**Avoid when:**
 
-- A lista tem poucos itens (< 50) e conteúdo simples
-- Os itens têm altura variável sem suporte a medição dinâmica
-- Todo o conteúdo precisa estar no DOM (ex.: impressão, SEO do conteúdo oculto)
+- The list has few items (< 50) with simple content
+- Items have variable height without dynamic measurement support
+- All content must be in the DOM (e.g. printing, SEO for hidden content)
 
-## Como funciona por baixo
+## How it works under the hood
 
-1. O usuário rola a lista → `handleScroll` atualiza `scrollTop`
-2. O hook calcula `start` e `end` com base na viewport + overscan
-3. Apenas `items.slice(start, end)` é retornado como `virtualItems`
-4. `totalHeight` mantém a barra de scroll proporcional ao dataset completo
-5. `offsetY` posiciona o bloco renderizado no ponto correto da lista
+1. The user scrolls the list → `handleScroll` updates `scrollTop`
+2. The hook calculates `start` and `end` based on viewport + overscan
+3. Only `items.slice(start, end)` is returned as `virtualItems`
+4. `totalHeight` keeps the scrollbar proportional to the full dataset
+5. `offsetY` positions the rendered block at the correct point in the list
 
-## Limitações atuais
+## Current limitations
 
-- Suporta apenas **altura fixa** por item
-- Não implementa navegação por teclado no combobox
-- Lista de países é mockada localmente (sem API)
+- Supports **fixed height** items only
+- No keyboard navigation in the combobox
+- Country list is mocked locally (no API)
 
-## Licença
+## License
 
-Projeto privado — uso pessoal/educacional.
+Private project — personal/educational use.
